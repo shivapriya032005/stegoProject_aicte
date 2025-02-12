@@ -2,7 +2,7 @@ import cv2
 import os
 
 def encrypt_message(image_path, message, password, output_image="encryptedImage.jpg"):
-    img = cv2.imread(image_path)
+    img = cv2.imread("mypic.png")
     
     if img is None:
         print("Error: Image not found!")
