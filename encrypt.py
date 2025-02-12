@@ -1,9 +1,9 @@
 import cv2
-import os
+import numpy as np
 
-def encrypt_message(image_path, message, password, output_image="encryptedImage.jpg"):
+def encrypt_message(image_path, message, password, output_image="encryptedImage.png"):
     img = cv2.imread("mypic.png")
-    
+
     if img is None:
         print("Error: Image not found!")
         return
@@ -14,14 +14,12 @@ def encrypt_message(image_path, message, password, output_image="encryptedImage.
 
     for char in message:
         img[n, m, z] = d[char]
-        n = n + 1
-        m = m + 1
+        n += 1
+        m += 1
         z = (z + 1) % 3
 
     cv2.imwrite(output_image, img)
     print(f"Message encrypted and saved as {output_image}")
-
-    os.system(f"start {output_image}")  # Opens the image (Windows)
 
 if __name__ == "__main__":
     img_path = input("Enter the image path: ")
