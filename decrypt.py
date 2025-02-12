@@ -1,8 +1,9 @@
 import cv2
+import numpy as np
 
 def decrypt_message(image_path, original_message_length, password):
-    img = cv2.imread(image_path)
-    
+    img = cv2.imread("encryptedImage.png")
+
     if img is None:
         print("Error: Image not found!")
         return
@@ -16,10 +17,18 @@ def decrypt_message(image_path, original_message_length, password):
     
     if password == pas:
         for _ in range(original_message_length):
-            message += c[img[n, m, z]]
-            n = n + 1
-            m = m + 1
+            pixel_value = int(img[n, m, z])  # Convert uint8 to int
+
+            if pixel_value in c:
+                message += c[pixel_value]
+            else:
+                print(f"Error: Unexpected pixel value {pixel_value} detected.")
+                return
+            
+            n += 1
+            m += 1
             z = (z + 1) % 3
+
         print("Decrypted message:", message)
     else:
         print("YOU ARE NOT AUTHORIZED!")
