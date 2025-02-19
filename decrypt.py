@@ -1,8 +1,7 @@
 import cv2
 import numpy as np
-
 def decrypt_message(image_path, original_message_length, password):
-    img = cv2.imread("encryptedImage.png")
+    img = cv2.imread(image_path)
 
     if img is None:
         print("Error: Image not found!")
